@@ -9,7 +9,7 @@ function App () {
 
   return (
     <>
-    <h1 className='container-title'>Crea tu lista de tareas</h1>
+    <h1 className='container-title'>TO DO LIST</h1>
     <ul className='container-list'>
       {tasks.map((task) => {
         return <Task task={count} key={count++} taskValue={task[0]} isTacha={task[1]} />
@@ -18,7 +18,7 @@ function App () {
         return <Task task={count} key={count++}/>
       })}
     </ul>
-    <button onClick={(newTask) => { newTask = count; setTask([...task, newTask]) }}>+</button>
+    <button onClick={(newTask) => { newTask = count; setTask([...task, newTask]) }} className='add-new-task'>+</button>
   </>
   )
 }

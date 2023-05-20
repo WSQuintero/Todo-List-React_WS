@@ -1,10 +1,78 @@
-li{
+li {
   list-style: none;
-  text-decoration: overline;
 }
-.strikethrough{
+.strikethrough {
   text-decoration: line-through;
 }
-.hide-item{
+.container-item {
+  width: 80%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+.inputItem {
+  padding-left: 20px;
+  height: 100%;
+  width: 70%;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color:  rgb(97, 97, 97);
+  border-bottom: 1px dotted rgb(68, 68, 68);
+}
+.inputItem:focus {
+  outline: none;
+
+}
+.classItem{
+   padding-left: 20px;
+  height: 100%;
+  width: 70%;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color:  rgb(97, 97, 97);
+  border-bottom: 1px dotted rgb(68, 68, 68); 
+}
+.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 100%;
+  color: rgb(124, 124, 124);
+  font-size: 2rem;
+  border: 1px solid rgb(97, 97, 97);
+  text-align: center;
+  border-radius: 20px;
+}
+.hide-item {
   display: none;
+}
+.change-button{
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: rgb(124, 124, 124);
+  font-size: 1.5rem;
+  border: 1px solid rgb(97, 97, 97);
+  text-align: center;
+  border-radius: 5px;
+}
+.add-new-task{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  color: rgb(124, 124, 124);
+  font-size: 2rem;
+  border: 1px solid rgb(97, 97, 97);
+  text-align: center;
+  border-radius: 20px;
+  right: 0;
 }

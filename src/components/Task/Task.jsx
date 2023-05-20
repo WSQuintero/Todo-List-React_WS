@@ -3,20 +3,32 @@ import './Task.css'
 const tasks = JSON.parse(localStorage.getItem('tasks')) || []
 
 export function Task ({ task, taskValue, isTacha }) {
-  const isMake = tasks.some((task) => {
-    return task[0] === taskValue
-  })
+  const [isStrikeThrough, setisStrikeThrough] = useState(isTacha)
+  console.log(isStrikeThrough)
+  const isMake = tasks.some((task) => { return task[0] === taskValue })
   const [state, setState] = useState(false)
   const [valorCampo, setValorCampo] = useState('')
   const [textButton, setTextButton] = useState(
-    isMake && isTacha === null ? 'Completar' : isMake && isTacha ? 'Desmarcar' : 'Crear'
+    isMake === true && isStrikeThrough === ''
+      ? 'Completar'
+      : isMake && isStrikeThrough
+        ? 'Desmarcar'
+        : 'Crear'
   )
   const [classText, setClassText] = useState(
-    isMake && isTacha === null ? '' : isMake && isTacha ? 'strikethrough' : ''
+    isMake === false && isStrikeThrough === undefined
+      ? ''
+      : isMake && isStrikeThrough
+        ? 'strikethrough'
+        : ''
   )
   const [hideItem, setHideItem] = useState('')
   const [isTrue, setIsTrue] = useState('')
-
+  const classItem = ` classItem ${classText}`
+  const indexItem = tasks.findIndex((tas) => {
+    return tas[0] === taskValue || tas[0] === valorCampo
+  })
+  const containerItemClass = `container-item ${hideItem} `
   function setLocalStorage () {
     const valorCampoFind = tasks.find((task) => {
       return task[0] === valorCampo || taskValue
@@ -30,32 +42,12 @@ export function Task ({ task, taskValue, isTacha }) {
       localStorage.setItem('tasks', ValueJson)
     }
   }
-  function TextButton () {
-    if (textButton === 'Crear') {
-      return <button onClick={setButtonToCreate}>{textButton}</button>
-    }
-
-    if (textButton === 'Completar') {
-      return <button onClick={setButtonToComplete}>{textButton}</button>
-    }
-
-    return <button onClick={setButtonToDeselect}>{textButton}</button>
-  }
   function TextItem () {
-    if (state === false && taskValue === undefined) {
-      return (
-        <input
-          type="text"
-          value={valorCampo}
-          onChange={(event) => setValorCampo(event.target.value)}
-        />
-      )
-    }
     if (taskValue !== undefined) {
-      return <span className={classText}>{taskValue}</span>
+      return <span className={classItem}>{taskValue}</span>
     } else {
       return (
-        <span className={classText}>
+        <span className={classItem}>
           {textButton === 'Completar' && isMake ? task[0] : valorCampo}
         </span>
       )
@@ -65,28 +57,23 @@ export function Task ({ task, taskValue, isTacha }) {
     setState(true)
     setTextButton('Completar')
     setLocalStorage()
+    console.log(isStrikeThrough)
   }
   function setButtonToComplete () {
+    setState(true)
     setClassText('strikethrough')
     setIsTrue(true)
-
-    const find = tasks.findIndex((task) => {
-      return task[0] === taskValue
-    })
-
-    tasks.splice(find, 1, [taskValue || valorCampo, isTrue])
-    setLocalStorage()
+    tasks[indexItem] = [taskValue || valorCampo, true]
     setTextButton('Desmarcar')
+    setLocalStorage()
   }
   function setButtonToDeselect () {
-    const find = tasks.findIndex((task) => {
-      return task[0]
-    })
-    tasks.splice(find, 1, [taskValue, isTrue])
-    setClassText('')
     setIsTrue(false)
-    setLocalStorage()
+    setClassText('')
     setTextButton('Completar')
+    setisStrikeThrough(false)
+    tasks[indexItem] = [taskValue || valorCampo, false]
+    setLocalStorage()
   }
   function deleteItem () {
     setHideItem('hide-item')
@@ -98,15 +85,52 @@ export function Task ({ task, taskValue, isTacha }) {
     })
     if (actualTask !== -1) tasks.splice(actualTask, 1)
     else if (beforeTask !== -1) tasks.splice(beforeTask, 1)
+
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }
+  function TextButton () {
+    if (textButton === 'Crear') {
+      return (
+        <button onClick={setButtonToCreate} className="change-button">
+          {textButton}
+        </button>
+      )
+    }
 
+    if (textButton === 'Completar') {
+      return (
+        <button onClick={setButtonToComplete} className="change-button">
+          {textButton}
+        </button>
+      )
+    }
+
+    return (
+      <button onClick={setButtonToDeselect} className="change-button">
+        {textButton}
+      </button>
+    )
+  }
   return (
-    <li className={hideItem}>
-      <span>{task}</span>
-      <button onClick={deleteItem}>X</button>
-      <TextItem />
+    <li className={containerItemClass}>
+      <span className="number">{task}</span>
+      {state === false && taskValue === undefined
+        ? (
+        <input
+          type="text"
+          value={valorCampo}
+          onChange={(event) => setValorCampo(event.target.value)}
+          className="inputItem"
+        />
+          )
+        : (
+        <TextItem />
+          )}
+
       <TextButton />
+      <button onClick={deleteItem} className="change-button">
+        X
+      </button>
     </li>
   )
 }
