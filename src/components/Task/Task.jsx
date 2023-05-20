@@ -71,8 +71,8 @@ export function Task ({ task, taskValue, isTacha }) {
     setIsTrue(false)
     setClassText('')
     setTextButton('Completar')
-    setisStrikeThrough(false)
-    tasks[indexItem] = [taskValue || valorCampo, false]
+    setisStrikeThrough('')
+    tasks[indexItem] = [taskValue || valorCampo, '']
     setLocalStorage()
   }
   function deleteItem () {
