@@ -5,3 +5,6 @@ li{
 .strikethrough{
   text-decoration: line-through;
 }
+.hide-item{
+  display: none;
+}
