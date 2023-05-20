@@ -11,8 +11,8 @@ function App () {
     <>
     <h1 className='container-title'>Crea tu lista de tareas</h1>
     <ul className='container-list'>
-      {tasks.map((taskValue) => {
-        return <Task task={count} key={count++} taskValue={taskValue} />
+      {tasks.map((task) => {
+        return <Task task={count} key={count++} taskValue={task[0]} isTacha={task[1]} />
       })}
       {task.map((tas) => {
         return <Task task={count} key={count++}/>

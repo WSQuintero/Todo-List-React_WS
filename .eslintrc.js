@@ -11,6 +11,8 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
+    'max-len': ['error', { code: 105 }]
+
   }
 }
