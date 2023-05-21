@@ -192,6 +192,7 @@ li {
     height: 40px;
     display: flex;
     justify-content: center;
+    margin: 0;
   }
   .change-button {
     border-radius: 10px;
