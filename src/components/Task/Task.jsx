@@ -8,11 +8,13 @@ export function Task ({ task, taskValue, isTacha }) {
   const isMake = tasks.some((task) => { return task[0] === taskValue })
   const [state, setState] = useState(false)
   const [valorCampo, setValorCampo] = useState('')
+  const [classDeselect, setClassDeselect] = useState('')
+
   const [textButton, setTextButton] = useState(
     isMake === true && isStrikeThrough === ''
       ? 'Completar'
       : isMake && isStrikeThrough
-        ? 'Desmarcar'
+        ? '-'
         : 'Crear'
   )
   const [classText, setClassText] = useState(
@@ -64,8 +66,9 @@ export function Task ({ task, taskValue, isTacha }) {
     setClassText('strikethrough')
     setIsTrue(true)
     tasks[indexItem] = [taskValue || valorCampo, true]
-    setTextButton('Desmarcar')
+    setTextButton('-')
     setLocalStorage()
+    setClassDeselect('deselect')
   }
   function setButtonToDeselect () {
     setIsTrue(false)
@@ -100,13 +103,24 @@ export function Task ({ task, taskValue, isTacha }) {
     if (textButton === 'Completar') {
       return (
         <button onClick={setButtonToComplete} className="change-button">
-          {textButton}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 48 48"
+            width="96px"
+            height="96px"
+          >
+            <path
+              fill="#43A047"
+              d="M40.6 12.1L17 35.7 7.4 26.1 4.6 29 17 41.3 43.4 14.9z"
+            />
+          </svg>
         </button>
       )
     }
 
+    const deselect = `change-button ${classDeselect}`
     return (
-      <button onClick={setButtonToDeselect} className="change-button">
+      <button onClick={setButtonToDeselect} className={deselect}>
         {textButton}
       </button>
     )
@@ -126,11 +140,12 @@ export function Task ({ task, taskValue, isTacha }) {
         : (
         <TextItem />
           )}
-
-      <TextButton />
-      <button onClick={deleteItem} className="change-button">
-        X
-      </button>
+      <div className='container-buttons'>
+        <TextButton />
+        <button onClick={deleteItem} className="close-button">
+          X
+        </button>
+      </div>
     </li>
   )
 }

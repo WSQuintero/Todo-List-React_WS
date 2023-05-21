@@ -2,16 +2,23 @@
   text-align: center;
   margin-bottom: 20px;
   color: #464646;
+  font-weight: 700;
 }
 .container-list{
   padding: 50px;
+  padding-top: 80px;
   width: 90vw;
-  min-height: 400px;
+  min-height: 80vh;
   max-height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background-color: #eeecec;
+  justify-content:flex-start;
+  background-color: rgba(148, 148, 148, 0.5);
   border-radius: 50px;
+  gap: 10px;
 }
+
+
+
+  
