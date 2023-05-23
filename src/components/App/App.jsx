@@ -1,25 +1,31 @@
 import React, { useState } from 'react'
-import { Task } from '../Task/Task'
-import './App.css'
+import { Title } from '../Title/TItle'
+import { ContainerList } from '../ContainerList/ContainerList'
+import { SaveTasks } from '../SaveTasks/SaveTasks'
+import { NewTask } from '../NewTask/NewTask'
+import { AddNewTask } from '../AddNewTask/AddNewTask'
+
 const tasks = JSON.parse(localStorage.getItem('tasks')) || []
 
 function App () {
-  let count = 1
-  const [task, setTask] = useState([count])
+  let count = 1 // eslint-disable-line prefer-const
+  const [task, setTaskList] = useState([count])
+  const [actualNumber, setActualNumber] = useState(tasks.length + 1)
+  const changeActualNumber = actualNumber
+  const createNewTask = () => {
+    setTaskList([...task, count])
+    setActualNumber(changeActualNumber + 1)
+  }
 
   return (
     <>
-    <h1 className='container-title'>TO DO LIST</h1>
-    <ul className='container-list'>
-      {tasks.map((task) => {
-        return <Task task={count} key={count++} taskValue={task[0]} isTacha={task[1]} />
-      })}
-      {task.map((tas) => {
-        return <Task task={count} key={count++}/>
-      })}
-    </ul>
-    <button onClick={(newTask) => { newTask = count; setTask([...task, newTask]) }} className='add-new-task'>+</button>
-  </>
+      <Title />
+      <ContainerList>
+        <SaveTasks count={count} tasks={tasks} />
+        <NewTask task={task} count={count} actualNumber={actualNumber} tasks={tasks}/>
+      </ContainerList>
+      <AddNewTask onClick={createNewTask} />
+    </>
   )
 }
 
