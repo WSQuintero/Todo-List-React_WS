@@ -4,6 +4,7 @@ import { ContainerList } from '../ContainerList/ContainerList'
 import { SaveTasks } from '../SaveTasks/SaveTasks'
 import { NewTask } from '../NewTask/NewTask'
 import { AddNewTask } from '../AddNewTask/AddNewTask'
+import { SearchTask } from '../SearchTask/SearchTask'
 
 const tasks = JSON.parse(localStorage.getItem('tasks')) || []
 
@@ -16,17 +17,28 @@ function App () {
     setTaskList([...task, count])
     setActualNumber(changeActualNumber + 1)
   }
+  const [actualTask, setActualTask] = useState()
+
+  function hola (j) {
+    setActualTask(j)
+  }
 
   return (
     <>
       <Title />
+      <SearchTask hola={hola} />
       <ContainerList>
-        <SaveTasks count={count} tasks={tasks} />
-        <NewTask task={task} count={count} actualNumber={actualNumber} tasks={tasks}/>
+        <SaveTasks count={count} tasks={tasks} actualTask={actualTask} />
+        <NewTask
+          task={task}
+          count={count}
+          actualNumber={actualNumber}
+          tasks={tasks}
+        />
       </ContainerList>
       <AddNewTask onClick={createNewTask} />
     </>
   )
 }
 
-export default App
+export { App }

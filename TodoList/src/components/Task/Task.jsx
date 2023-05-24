@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import './Task.css'
 const tasks = JSON.parse(localStorage.getItem('tasks')) || []
 
-export function Task ({ task, taskValue, isTacha }) {
+export function Task ({ task, taskValue, isTacha, className }) {
   const [isStrikeThrough, setisStrikeThrough] = useState(isTacha)
-  console.log(isStrikeThrough)
   const isMake = tasks.some((task) => { return task[0] === taskValue })
   const [state, setState] = useState(false)
   const [valorCampo, setValorCampo] = useState('')
@@ -59,7 +58,6 @@ export function Task ({ task, taskValue, isTacha }) {
     setState(true)
     setTextButton('Completar')
     setLocalStorage()
-    console.log(isStrikeThrough)
   }
   function setButtonToComplete () {
     setState(true)
@@ -126,7 +124,7 @@ export function Task ({ task, taskValue, isTacha }) {
     )
   }
   return (
-    <li className={containerItemClass}>
+    <li className={`${containerItemClass} ${className}`}>
       <span className="number">{task}</span>
       {state === false && taskValue === undefined
         ? (
@@ -140,7 +138,7 @@ export function Task ({ task, taskValue, isTacha }) {
         : (
         <TextItem />
           )}
-      <div className='container-buttons'>
+      <div className="container-buttons">
         <TextButton />
         <button onClick={deleteItem} className="close-button">
           X
