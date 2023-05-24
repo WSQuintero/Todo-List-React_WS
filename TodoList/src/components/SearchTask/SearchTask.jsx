@@ -1,15 +1,19 @@
 import React from 'react'
+import { SvgSearch } from '../svgSearch/SvgSearch';
+import "./SearchTask.css"
 
-export function SearchTask ({ hola }) {
-  // const [valorInput, setValorInput] = useState()
-  // let valorInput
-  // hola(valorInput)
-
+function SearchTask ({ hola }) {
   return (
-    <input
-      type="text"
-      // value={valorInput}
-      onChange={(event) => hola(event.target.value) }
-    />
-  )
+    <div className="containerSearch">
+      <input
+        type="text"
+        onChange={(event) => hola(event.target.value)}
+        className="InputSearch"
+        placeholder="Desayunar"
+      />
+        <SvgSearch></SvgSearch>
+    </div>
+  );
 }
+
+export { SearchTask }

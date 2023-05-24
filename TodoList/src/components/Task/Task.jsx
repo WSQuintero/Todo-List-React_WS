@@ -4,7 +4,9 @@ const tasks = JSON.parse(localStorage.getItem('tasks')) || []
 
 export function Task ({ task, taskValue, isTacha, className }) {
   const [isStrikeThrough, setisStrikeThrough] = useState(isTacha)
-  const isMake = tasks.some((task) => { return task[0] === taskValue })
+  const isMake = tasks.some((task) => {
+    return task[0] === taskValue
+  })
   const [state, setState] = useState(false)
   const [valorCampo, setValorCampo] = useState('')
   const [classDeselect, setClassDeselect] = useState('')
@@ -30,6 +32,7 @@ export function Task ({ task, taskValue, isTacha, className }) {
     return tas[0] === taskValue || tas[0] === valorCampo
   })
   const containerItemClass = `container-item ${hideItem} `
+
   function setLocalStorage () {
     const valorCampoFind = tasks.find((task) => {
       return task[0] === valorCampo || taskValue

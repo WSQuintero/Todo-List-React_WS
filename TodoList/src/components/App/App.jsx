@@ -20,7 +20,7 @@ function App () {
   const [actualTask, setActualTask] = useState()
 
   function hola (j) {
-    setActualTask(j)
+    setActualTask(j);
   }
 
   return (
@@ -34,6 +34,7 @@ function App () {
           count={count}
           actualNumber={actualNumber}
           tasks={tasks}
+          actualTask={actualTask}
         />
       </ContainerList>
       <AddNewTask onClick={createNewTask} />

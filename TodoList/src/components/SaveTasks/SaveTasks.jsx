@@ -1,12 +1,12 @@
-import React from 'react'
-import { Task } from '../Task/Task'
+import React from "react";
+import { Task } from "../Task/Task";
 
-export function SaveTasks ({ count, tasks, actualTask }) {
+export function SaveTasks({ count, tasks, actualTask }) {
   return tasks.map((task, index) => {
     const hide =
-       !task[0].startsWith(actualTask) && actualTask !== undefined
-         ? 'hide'
-         : false
+      !task[0].startsWith(String(actualTask).toLowerCase()) && actualTask !== undefined
+        ? "hide"
+        : false;
     return (
       <Task
         task={count++}
@@ -15,6 +15,6 @@ export function SaveTasks ({ count, tasks, actualTask }) {
         isTacha={task[1]}
         className={hide}
       />
-    )
-  })
+    );
+  });
 }

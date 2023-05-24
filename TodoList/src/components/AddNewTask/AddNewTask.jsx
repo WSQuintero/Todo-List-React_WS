@@ -1,4 +1,5 @@
 import React from 'react'
+import "./AddNewTask.css"
 
 export function AddNewTask ({ onClick }) {
   return (
@@ -7,3 +8,4 @@ export function AddNewTask ({ onClick }) {
     </button>
   )
 }
+
