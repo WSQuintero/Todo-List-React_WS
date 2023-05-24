@@ -4,7 +4,7 @@ import { Task } from "../Task/Task";
 export function SaveTasks({ count, tasks, actualTask }) {
   return tasks.map((task, index) => {
     const hide =
-      !task[0].startsWith(String(actualTask).toLowerCase()) && actualTask !== undefined
+      !String(task[0]).toLowerCase().startsWith(String(actualTask).toLowerCase()) && actualTask !== undefined
         ? "hide"
         : false;
     return (
