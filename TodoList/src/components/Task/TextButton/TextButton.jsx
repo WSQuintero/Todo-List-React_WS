@@ -13,7 +13,8 @@ export function TextButton ({
   tasks,
   taskValue,
   valorCampo,
-  setisStrikeThrough
+  setisStrikeThrough,
+  isStrikeThrough
 }) {
   const indexItem = tasks.findIndex((taskIndex) => {
     return taskIndex[0] === taskValue || taskIndex[0] === valorCampo
@@ -41,7 +42,9 @@ export function TextButton ({
     setLocalStorage()
     setClassDeselect('')
   }
-  const classTextButton = classDeselect !== '' ? `change-button ${classDeselect}` : 'change-button'
+
+  const classTextButton =
+    classDeselect !== '' ? `change-button ${classDeselect}` : 'change-button'
 
   return (
     <button
