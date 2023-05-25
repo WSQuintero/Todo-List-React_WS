@@ -81,16 +81,6 @@ li {
   transition: all 0.4s ease-in-out;
 }
 
-.change-button svg {
-  width: 70%;
-  transition: all 1s ease-in-out;
-}
-.change-button:hover svg {
-  width: 50%;
-}
-.change-button:hover path {
-  fill: white;
-}
 .close-button {
   padding: 15px;
   display: flex;
@@ -130,8 +120,6 @@ li {
 .deselect:hover {
   background-color: #e8eb60;
 }
-
-
 
 @media (max-width: 700px) {
   .container-item {
@@ -175,6 +163,6 @@ li {
   }
 }
 
-.hide{
+.hide {
   display: none;
 }

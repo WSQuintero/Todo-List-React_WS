@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { TextButton } from './TextButton/TextButton'
+import { TextItem } from './TextItem/TextItem'
 import './Task.css'
-const tasks = JSON.parse(localStorage.getItem('tasks')) || []
 
 export function Task ({ task, taskValue, isTacha, className }) {
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || []
   const [isStrikeThrough, setisStrikeThrough] = useState(isTacha)
   const isMake = tasks.some((task) => {
     return task[0] === taskValue
@@ -10,7 +12,6 @@ export function Task ({ task, taskValue, isTacha, className }) {
   const [state, setState] = useState(false)
   const [valorCampo, setValorCampo] = useState('')
   const [classDeselect, setClassDeselect] = useState('')
-
   const [textButton, setTextButton] = useState(
     isMake === true && isStrikeThrough === ''
       ? 'Completar'
@@ -27,10 +28,7 @@ export function Task ({ task, taskValue, isTacha, className }) {
   )
   const [hideItem, setHideItem] = useState('')
   const [isTrue, setIsTrue] = useState('')
-  const classItem = ` classItem ${classText}`
-  const indexItem = tasks.findIndex((tas) => {
-    return tas[0] === taskValue || tas[0] === valorCampo
-  })
+  const isInput = state === false && taskValue === undefined
   const containerItemClass = `container-item ${hideItem} `
 
   function setLocalStorage () {
@@ -46,39 +44,7 @@ export function Task ({ task, taskValue, isTacha, className }) {
       localStorage.setItem('tasks', ValueJson)
     }
   }
-  function TextItem () {
-    if (taskValue !== undefined) {
-      return <span className={classItem}>{taskValue}</span>
-    } else {
-      return (
-        <span className={classItem}>
-          {textButton === 'Completar' && isMake ? task[0] : valorCampo}
-        </span>
-      )
-    }
-  }
-  function setButtonToCreate () {
-    setState(true)
-    setTextButton('Completar')
-    setLocalStorage()
-  }
-  function setButtonToComplete () {
-    setState(true)
-    setClassText('strikethrough')
-    setIsTrue(true)
-    tasks[indexItem] = [taskValue || valorCampo, true]
-    setTextButton('-')
-    setLocalStorage()
-    setClassDeselect('deselect')
-  }
-  function setButtonToDeselect () {
-    setIsTrue(false)
-    setClassText('')
-    setTextButton('Completar')
-    setisStrikeThrough('')
-    tasks[indexItem] = [taskValue || valorCampo, '']
-    setLocalStorage()
-  }
+
   function deleteItem () {
     setHideItem('hide-item')
     const actualTask = tasks.findIndex((task) => {
@@ -92,58 +58,47 @@ export function Task ({ task, taskValue, isTacha, className }) {
 
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }
-  function TextButton () {
-    if (textButton === 'Crear') {
-      return (
-        <button onClick={setButtonToCreate} className="change-button">
-          {textButton}
-        </button>
-      )
-    }
 
-    if (textButton === 'Completar') {
-      return (
-        <button onClick={setButtonToComplete} className="change-button">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 48 48"
-            width="96px"
-            height="96px"
-          >
-            <path
-              fill="#43A047"
-              d="M40.6 12.1L17 35.7 7.4 26.1 4.6 29 17 41.3 43.4 14.9z"
-            />
-          </svg>
-        </button>
-      )
-    }
-
-    const deselect = `change-button ${classDeselect}`
-    return (
-      <button onClick={setButtonToDeselect} className={deselect}>
-        {textButton}
-      </button>
-    )
-  }
   return (
     <li className={`${containerItemClass} ${className}`}>
-      <span className="number">{task}</span>
-      {state === false && taskValue === undefined
+      <span className='number'>{task}</span>
+
+      {isInput
         ? (
         <input
-          type="text"
+          type='text'
           value={valorCampo}
           onChange={(event) => setValorCampo(event.target.value)}
-          className="inputItem"
+          className='inputItem'
         />
           )
         : (
-        <TextItem />
+        <TextItem
+          taskValue={taskValue}
+          textButton={textButton}
+          isMake={isMake}
+          valorCampo={valorCampo}
+          task={task}
+          classText={classText}
+        />
           )}
-      <div className="container-buttons">
-        <TextButton />
-        <button onClick={deleteItem} className="close-button">
+
+      <div className='container-buttons'>
+        <TextButton
+          classDeselect={classDeselect}
+          textButton={textButton}
+          setTextButton={setTextButton}
+          setLocalStorage={setLocalStorage}
+          setState={setState}
+          setClassText={setClassText}
+          setIsTrue={setIsTrue}
+          setClassDeselect={setClassDeselect}
+          tasks={tasks}
+          taskValue={taskValue}
+          valorCampo={valorCampo}
+          setisStrikeThrough={setisStrikeThrough}
+        />
+        <button onClick={deleteItem} className='close-button'>
           X
         </button>
       </div>

@@ -1,0 +1,10 @@
+.change-button svg {
+  width: 70%;
+  transition: all 1s ease-in-out;
+}
+.change-button:hover svg {
+  width: 50%;
+}
+.change-button:hover path {
+  fill: white;
+}
