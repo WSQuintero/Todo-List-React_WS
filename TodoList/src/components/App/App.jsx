@@ -19,9 +19,6 @@ function App () {
   }
   const [actualTask, setActualTask] = useState()
 
-  // function hola (j) {
-  //   setActualTask(j);
-  // }
 
   return (
     <>
