@@ -2,7 +2,7 @@ import React from 'react'
 import { SvgSearch } from '../svgSearch/SvgSearch';
 import "./SearchTask.css"
 
-function SearchTask ({ hola }) {
+function SearchTask({ setActualTask }) {
   return (
     <div className='containerSearch'>
       <input

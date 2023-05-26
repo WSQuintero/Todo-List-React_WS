@@ -7,6 +7,7 @@ export function SaveTasks({ count, tasks, actualTask }) {
       !String(task[0]).toLowerCase().startsWith(String(actualTask).toLowerCase()) && actualTask !== undefined
         ? "hide"
         : false;
+        console.log(hide  )
     return (
       <Task
         task={count++}
