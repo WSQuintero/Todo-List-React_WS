@@ -19,14 +19,14 @@ function App () {
   }
   const [actualTask, setActualTask] = useState()
 
-  function hola (j) {
-    setActualTask(j);
-  }
+  // function hola (j) {
+  //   setActualTask(j);
+  // }
 
   return (
     <>
       <Title />
-      <SearchTask hola={hola} />
+      <SearchTask setActualTask={setActualTask} />
       <ContainerList>
         <SaveTasks count={count} tasks={tasks} actualTask={actualTask} />
         <NewTask

@@ -4,16 +4,16 @@ import "./SearchTask.css"
 
 function SearchTask ({ hola }) {
   return (
-    <div className="containerSearch">
+    <div className='containerSearch'>
       <input
-        type="text"
-        onChange={(event) => hola(event.target.value)}
-        className="InputSearch"
-        placeholder="Desayunar"
+        type='text'
+        onChange={(event) => setActualTask(event.target.value)}
+        className='InputSearch'
+        placeholder='Desayunar'
       />
-        <SvgSearch></SvgSearch>
+      <SvgSearch></SvgSearch>
     </div>
-  );
+  )
 }
 
 export { SearchTask }
